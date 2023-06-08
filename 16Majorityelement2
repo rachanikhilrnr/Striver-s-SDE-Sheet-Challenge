@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static ArrayList<Integer> majorityElementII(ArrayList<Integer> arr) 
+    {
+        HashMap<Integer,Integer> hs=new HashMap<>();
+        int gr=(int)(arr.size()/3.0);
+        for(int i=0;i<arr.size();i++){
+            if(hs.containsKey(arr.get(i))){
+                int a=hs.get(arr.get(i));
+                hs.remove(arr.get(i));
+                a++;
+                hs.put(arr.get(i),a);
+            }
+            else{
+                hs.put(arr.get(i),1);
+            }
+        }
+        arr.clear();
+        for (Map.Entry<Integer,Integer> mapElement : hs.entrySet()) {
+            if(mapElement.getValue()>gr){
+                arr.add(mapElement.getKey());
+            }
+        }
+        return arr;
+    }
+}

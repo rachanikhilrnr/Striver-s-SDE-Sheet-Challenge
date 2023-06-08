@@ -1,0 +1,50 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************i************************************************/
+import java.util.*;
+public class Solution
+{
+    public static Node findMiddle(Node head)
+    {
+        ArrayList<Integer> arr=new ArrayList<>();
+        Node temp=head;
+        while(temp!=null){
+            arr.add(temp.data);
+            temp=temp.next;
+        }
+        int mid=(int)Math.floor(arr.size()/2.0);
+        int count=0;
+        Node t=head;
+        while(t!=null){
+            if(count==mid){
+                return t;
+            }
+            count++;
+            t=t.next;
+        }
+        return t;
+    }
+}

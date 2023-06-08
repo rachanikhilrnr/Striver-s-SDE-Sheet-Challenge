@@ -1,0 +1,15 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static int[] ninjaAndSortedArrays(int arr1[], int arr2[], int m, int n) {
+        int c=0;
+        for(int i=0;i<arr1.length;i++){
+            if(arr1[i]==0){
+                arr1[i]=arr2[c++];
+            }
+        }
+        Arrays.sort(arr1);
+        return arr1;
+    }
+}
