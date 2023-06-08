@@ -1,0 +1,17 @@
+import java.util.*;
+public class Solution {
+
+    public static boolean detectCycle(Node head) {
+        HashMap<Node,Integer> hs=new HashMap<>();
+        while(head!=null){
+            if(hs.containsKey(head)){
+                return true;
+            }
+            else{
+                hs.put(head,1);
+            }
+            head=head.next;
+        }
+        return false;
+    }
+}
