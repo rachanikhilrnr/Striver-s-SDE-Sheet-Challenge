@@ -1,0 +1,44 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T>
+    {
+       public:
+        T data;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        TreeNode(T data)
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    };
+
+************************************************************/
+
+public class Solution {
+
+    public static int floorInBST(TreeNode<Integer> root, int X) {
+        ArrayList<Integer> arr=new ArrayList<>();
+        traverse(root,arr);
+        for(int i=arr.size()-1;i>=0;i--){
+            if(arr.get(i)<=X){
+                return arr.get(i);
+            }
+        }
+        return 0;
+    }
+    private static void traverse(TreeNode<Integer> t,ArrayList<Integer> arr){
+        if(t==null){
+            return;
+        }
+        traverse(t.left,arr);
+        arr.add(t.data);
+        traverse(t.right,arr);
+    }
+}

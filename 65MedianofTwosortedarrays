@@ -1,0 +1,62 @@
+import java.util.*;
+public class Solution {
+    public static double median(int[] a, int[] b) {
+        int l=(a.length+b.length)/2;
+        int i=0;
+        int j=0;
+        int c=0;
+        while(i<a.length && j<b.length){
+            if(a[i]<b[j]){
+                i++;
+            }
+            else{
+                j++;
+            }
+            c++;
+            if(c==l && l%2==0){
+                double res=(a[i]+a[j])/2.0;
+                return res;
+            }
+            else if(c==1 && l%2==1){
+                if(a[i]<a[j]){
+                    return a[i];
+                }
+                else{
+                    return a[j];
+                }
+            }
+        }
+        while(i<a.length){
+            i++;
+            c++;
+            if(c==l && l%2==0){
+                double res=(a[i]+a[j])/2.0;
+                return res;
+            }
+            else if(c==l && l%2==1){
+                if(a[i]<a[j]){
+                    return a[i];
+                }
+                else{
+                    return a[j];
+                }
+            }
+        }
+        while(j<b.length){
+            j++;
+            if(c==l && l%2==0){
+                double res=(a[i]+a[j])/2.0;
+                return res;
+            }
+            else if(c==l && l%2==1){
+                if(a[i]<a[j]){
+                    return a[i];
+                }
+                else{
+                    return a[j];
+                }
+            }
+        }
+        return 0;
+    }
+}

@@ -1,0 +1,57 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+	Following is the Binary Tree node structure:
+
+	class BinaryTreeNode<T> {
+	    T data;
+	    BinaryTreeNode<T> left;
+	    BinaryTreeNode<T> right;
+
+	    public BinaryTreeNode(T data) {
+	        this.data = data;
+	    }
+	}
+
+************************************************************/
+
+public class Solution {
+    public static void preorder(BinaryTreeNode<Integer> t,List<Integer> res){
+		if(t==null){
+			return;
+		}
+		res.add(t.data);
+		preorder(t.left,res);
+		preorder(t.right,res);
+	}
+	public static void inorder(BinaryTreeNode<Integer> t,List<Integer> res){
+		if(t==null){
+			return;
+		}
+		inorder(t.left,res);
+		res.add(t.data);
+		inorder(t.right,res);
+	}
+	public static void postorder(BinaryTreeNode<Integer> t,List<Integer> res){
+		if(t==null){
+			return;
+		}
+		postorder(t.left,res);
+		postorder(t.right,res);
+		res.add(t.data);
+	}
+    public static List<List<Integer>> getTreeTraversal(BinaryTreeNode<Integer> root) {
+        List<List<Integer>> l=new ArrayList<>();
+		List<Integer> r1=new ArrayList<>();
+		List<Integer> r2=new ArrayList<>();
+		List<Integer> r3=new ArrayList<>();
+		inorder(root,r1);
+		preorder(root,r2);
+		postorder(root,r3);
+		l.add(new ArrayList<>(r1));
+		l.add(new ArrayList<>(r2));
+		l.add(new ArrayList<>(r3));
+		return l;
+    }
+}

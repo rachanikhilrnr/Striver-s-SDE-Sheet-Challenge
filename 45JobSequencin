@@ -1,0 +1,33 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution
+{
+    public static int jobScheduling(int[][] jobs)
+    {
+        Arrays.sort(jobs,new Comparator<int[]>(){
+            public int compare(int[] a,int[] b){
+                return b[1]-a[1];
+            }
+        });
+        int sum=0;
+        HashMap<Integer,Integer> hs=new HashMap<>();
+        for(int i=0;i<jobs.length;i++){
+            if(hs.get(jobs[i][0])!=null){
+                int tra=jobs[i][0]-1;
+                while(tra>=1){
+                    if(hs.get(tra)==null){
+                        hs.put(tra,1);
+                        sum+=(jobs[i][1]);
+                        break;
+                    }
+                    tra--;
+                }
+            }
+            else{
+                hs.put(jobs[i][0],1);
+                sum+=(jobs[i][1]);
+            }
+        }
+        return sum;
+    }
+}

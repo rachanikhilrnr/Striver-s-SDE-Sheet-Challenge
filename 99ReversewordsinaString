@@ -1,0 +1,9 @@
+def reverseString(str: str) -> str:
+    lst=str.split()
+    st=""
+    for i in range(len(lst)-1,-1,-1):
+        st+=(lst[i]);
+        if(i==0):
+            break;
+        st+=" "
+    return st

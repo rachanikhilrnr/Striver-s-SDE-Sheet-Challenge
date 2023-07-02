@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean areAnagram(String str1, String str2){
+        HashMap<Character,Integer> hs=new HashMap<>();
+        for(int i=0;i<str1.length();i++){
+            if(hs.get(str1.charAt(i))==null){
+                hs.put(str1.charAt(i),1);
+            }
+            else{
+                hs.put(str1.charAt(i),hs.get(str1.charAt(i))+1);
+            }
+        }
+        for(int j=0;j<str2.length();j++){
+            if(hs.get(str2.charAt(j))==null){
+                return false;
+            }
+            else{
+                hs.put(str2.charAt(j),hs.get(str2.charAt(j))-1);
+                if(hs.get(str2.charAt(j))==0){
+                    hs.remove(str2.charAt(j));
+                }
+            }
+        }
+        if(hs.size()==0){
+            return true;
+        }
+        return false;
+    }
+}

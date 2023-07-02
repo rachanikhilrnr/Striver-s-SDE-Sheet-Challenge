@@ -1,0 +1,53 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node child;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.child = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.child = null;
+     }
+     Node(int data, Node next, Node child)
+     {
+         this.data = data;
+         this.next = next;
+         this.child = child;
+     }
+ }
+
+ *****************************************************************/
+import java.util.*;
+public class Solution {
+    public static Node flattenLinkedList(Node head) {
+        ArrayList<Integer> arr=new ArrayList<>();
+        while(head!=null){
+            arr.add(head.data);
+            Node rod=head.child;
+            while(rod!=null){
+                arr.add(rod.data);
+                rod=rod.child;
+            }
+            head=head.next;
+        }
+        Collections.sort(arr);
+        Node f=new Node(arr.get(0));
+        Node fin=f;
+        for(int i=1;i<arr.size();i++){
+            fin.child=new Node(arr.get(i));
+            fin=fin.child;
+        }
+        return f;
+    }
+}

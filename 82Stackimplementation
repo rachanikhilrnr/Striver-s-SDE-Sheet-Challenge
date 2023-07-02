@@ -1,0 +1,41 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Stack {
+    ArrayList<Integer> arr=new ArrayList<>();
+    int length;
+    public Stack(int number){
+        length=number;
+    }
+    void push(int num) {
+        if(arr.size()<length){
+            arr.add(num);
+        }
+    }
+    int pop() {
+        if(arr.isEmpty()){
+            return -1;
+        }
+        return (arr.remove(arr.size()-1));
+    }
+    int top() {
+        if(arr.isEmpty()){
+            return -1;
+        }
+        return arr.get(arr.size()-1);
+    }
+    int isEmpty() {
+        if(arr.isEmpty()){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    int isFull() {
+        if(arr.size()==length){
+            return 1;
+        }
+        return 0;
+    }
+}

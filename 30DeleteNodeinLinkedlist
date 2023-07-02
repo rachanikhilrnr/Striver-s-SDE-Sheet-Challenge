@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.* ;
+
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+     
+
+*****************************************************************/
+
+public class Solution {
+	public static void deleteNode(LinkedListNode<Integer> node) {
+        if(node!=null && node.next==null){
+            
+        }
+        if(node!=null){
+            int a=node.data;
+            int b=node.next.data;
+            node.data=b;
+            node.next.data=a;
+            node.next=node.next.next;
+        }
+	}
+}

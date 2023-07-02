@@ -1,0 +1,26 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+        HashMap<Integer,Integer> hs=new HashMap<>();
+        hs.put(0,1);
+        travs(0,num,0,hs);
+        System.out.println(hs);
+        ArrayList<Integer> arr=new ArrayList<>();
+        for(Map.Entry<Integer,Integer> mapElement : hs.entrySet()){
+          arr.add(mapElement.getKey());
+        }
+        return arr;
+    }
+    public static void travs(int idx,int[] num,int sum,HashMap<Integer,Integer> hs){
+        sum+=(num[idx]);
+        hs.put(sum,1);
+        if(idx+1<num.length){
+            travs(idx+1,num,sum,hs);
+        }
+        sum-=(num[idx]);
+        if(idx+1<num.length){
+            travs(idx+1,num,sum,hs);
+        }
+    }
+}

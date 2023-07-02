@@ -1,0 +1,35 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static long getTrappedWater(long[] arr, int n) {
+        long maxx=Long.MIN_VALUE;
+        long[] left=new long[arr.length];
+        long[] right=new long[arr.length];
+        for(int i=0;i<n;i++){
+            if(i==0){
+                left[i]=arr[i];
+                maxx=Math.max(arr[i],maxx);
+            }
+            else{
+                left[i]=Math.max(arr[i],maxx);
+                maxx=Math.max(arr[i],maxx);
+            }
+        }
+        long m=Long.MIN_VALUE;
+        for(int j=arr.length-1;j>=0;j--){
+            if(j==arr.length-1){
+                right[j]=arr[j];
+                m=Math.max(arr[j],m);
+            }
+            else{
+                right[j]=Math.max(arr[j],m);
+                m=Math.max(arr[j],m);
+            }
+        }
+        long count=0;
+        for(int x=0;x<n;x++){
+            count+=(Math.min(right[x],left[x])-arr[x]);
+        }
+        return count;
+    }
+}
