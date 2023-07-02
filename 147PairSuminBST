@@ -1,0 +1,50 @@
+import java.util.* ;
+import java.io.*; 
+/*************************************************************
+    
+    Following is the Binary Tree node structure:
+
+    class BinaryTreeNode {
+
+	int data;
+	BinaryTreeNode left;
+	BinaryTreeNode right;
+	
+	BinaryTreeNode(int data) {
+		this.data = data;
+		left = null;
+		right = null;
+	   }
+    }
+
+*************************************************************/
+
+public class Solution {
+	public static boolean pairSumBst(BinaryTreeNode root, int k) {
+		HashMap<Integer,Integer> hs=new HashMap<>();
+		ArrayList<Integer> arr=new ArrayList<>();
+		traverse(root,hs,arr,k);
+		if(arr.size()!=0){
+			return true;
+		}
+		return false;
+	}
+	public static void traverse(BinaryTreeNode t,HashMap<Integer,Integer> hs,ArrayList<Integer> arr,int k){
+		if(t==null){
+			return;
+		}
+		if(hs.containsKey(t.data)){
+			hs.put(t.data,hs.get(t.data)+1);
+		}
+		else{
+			hs.put(t.data,1);
+		}
+		int d=k-t.data;
+		if(hs.containsKey(d)){
+			arr.add(1);
+		}
+		traverse(t.left,hs,arr,k);
+		traverse(t.right,hs,arr,k);
+	}
+}
+

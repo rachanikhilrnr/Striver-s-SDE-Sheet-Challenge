@@ -1,0 +1,40 @@
+import java.util.* ;
+import java.io.*; 
+
+/*************************************************************
+ class BinaryTreeNode<T> {
+	T data;
+	BinaryTreeNode<T> left;
+	BinaryTreeNode<T> right;
+
+	public BinaryTreeNode(T data) {
+		this.data = data;
+	}
+}
+
+*************************************************************/
+
+
+public class Solution {
+	
+	public static BinaryTreeNode<Integer> BTtoDLL(BinaryTreeNode<Integer> root) {
+		ArrayList<Integer> arr=new ArrayList<>();
+		BinaryTreeNode<Integer> ans=new BinaryTreeNode<>(0);
+		BinaryTreeNode<Integer> temp=ans;
+		traverse(root,arr);
+		for(int i=0;i<arr.size();i++){
+			temp.right=new BinaryTreeNode<>(arr.get(i));
+			temp=temp.right;
+		}
+		return ans.right;
+	}
+	public static void traverse(BinaryTreeNode<Integer> t,ArrayList<Integer> arr){
+		if(t==null){
+			return;
+		}
+		traverse(t.left,arr);
+		arr.add(t.data);
+		traverse(t.right,arr);
+	}
+
+}
