@@ -1,0 +1,27 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def maximumValue(items, n, w):
+	l=[]
+	for i in range(len(items)):
+		a=items[i][1]/items[i][0]
+		l.append(a);
+	res=[]
+	for i in range(len(l)):
+		res.append([l[i],items[i][0],items[i][1]])
+	res.sort(reverse=True);
+	sum=0
+	weight=w
+	for i in range(len(res)):
+		if(weight==0):
+			return sum
+		
+		if(weight>res[i][1]):
+			sum+=(res[i][2])
+			weight-=(res[i][1])
+		else:
+			sum+=(res[i][0]*weight)
+			weight=0
+	return sum
