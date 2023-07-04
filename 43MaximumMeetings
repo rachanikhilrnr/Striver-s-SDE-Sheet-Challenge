@@ -1,0 +1,31 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static List<Integer> maximumMeetings(int[] start, int[] end) {   
+        List<Integer> l=new ArrayList<>();     
+        if(start.length==0 || end.length==0){
+            return l;
+        }
+        int[][] arr=new int[start.length][3];
+        for(int i=0;i<start.length;i++){
+            arr[i][0]=start[i];
+            arr[i][1]=end[i];
+            arr[i][2]=i+1;
+        }
+        Arrays.sort(arr,new Comparator<int[]>(){
+            public int compare(int[] a,int[] b){
+                return a[1]-b[1];
+            }
+        });
+        ArrayList<Integer> dummy=new ArrayList<>();
+        l.add(arr[0][2]);
+        dummy.add(arr[0][1]);
+        for(int i=1;i<arr.length;i++){
+            if(arr[i][0]>dummy.get(dummy.size()-1)){
+                l.add(arr[i][2]);
+                dummy.add(arr[i][1]);
+            }
+        }
+        return l;
+    }
+}
