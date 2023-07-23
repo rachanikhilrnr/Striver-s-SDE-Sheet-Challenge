@@ -1,0 +1,168 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the Binary Tree node structure:
+    
+   class TreeNode {
+	    int data;
+	    TreeNode left;
+	    TreeNode right;
+
+	    TreeNode(int data) {
+		    this.data = data;
+		    this.left = null;
+		    this.right = null;
+	    }
+
+    }
+
+************************************************************/
+
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<Integer> traverseBoundary(TreeNode root){
+		ArrayList<Integer> arr1=new ArrayList<>();
+		ArrayList<Integer> arr2=new ArrayList<>();
+		ArrayList<Integer> arr3=new ArrayList<>();
+		ArrayList<Integer> arr=new ArrayList<>();
+		left(root,arr1,0);
+		for(int i=0;i<arr1.size();i++){
+			arr.add(arr1.get(i));
+		}
+		leaf(root,arr2,arr);
+		for(int i=0;i<arr2.size();i++){
+			arr.add(arr2.get(i));
+		}
+		right(root.right,arr3,0,arr);
+		for(int i=0;i<arr3.size();i++){
+			arr.add(arr3.get(i));
+		}
+		Collections.reverse(arr3);
+		return arr;
+	}
+	public static void left(TreeNode n,ArrayList<Integer> arr,int lvl){
+		if(n==null){
+			return;
+		}
+		if(n!=null && n.left==null && n.right==null){
+			return;
+		}
+		if(arr.size()==lvl){
+			arr.add(n.data);
+		}
+		left(n.left,arr,lvl+1);
+		left(n.right,arr,lvl+1);
+	}
+	public static void leaf(TreeNode n,ArrayList<Integer> arr,ArrayList<Integer> fin){
+		if(n==null){
+			return;
+		}
+		if(n!=null && n.left==null && n.right==null){
+			if(!fin.contains(n.data)){
+				arr.add(n.data);
+			}
+			return;
+		}
+		leaf(n.left,arr,fin);
+		leaf(n.right,arr,fin);
+	}
+	public static void right(TreeNode n,ArrayList<Integer> arr,int lvl,ArrayList<Integer> fin){
+		if(n==null){
+			return;
+		}
+		if(n!=null && n.left==null && n.right==null){
+			return;
+		}
+		if(arr.size()==lvl){
+			if(!fin.contains(n.data)){
+				arr.add(n.data);bool isLeaf(TreeNode<int> *root){
+
+                    if(root->right==nullptr && root->left==nullptr) return true;
+                
+                    return false;
+                
+                }
+                
+                void leftB(TreeNode<int>* root,vector<int>&ans){
+                
+                    while(root){
+                
+                        if(!isLeaf(root)) ans.push_back(root->data);
+                
+                        if(root->left) root=root->left;
+                
+                        else root=root->right;
+                
+                    }
+                
+                }
+                
+                void leafN(TreeNode<int>* root,vector<int>&ans){
+                
+                    if(isLeaf(root)){
+                
+                        ans.push_back(root->data);
+                
+                        return ;
+                
+                    }
+                
+                    if(root->left) leafN(root->left,ans);
+                
+                    if(root->right) leafN(root->right,ans);
+                
+                }
+                
+                void rightB(TreeNode<int>* root,vector<int>&ans){
+                
+                    vector<int>temp;
+                
+                    while(root){
+                
+                        if(!isLeaf(root)) temp.push_back(root->data);
+                
+                        if(root->right) root=root->right;
+                
+                        else root=root->left;
+                
+                    }
+                
+                    for(int i=temp.size()-1;i>=0;i--){
+                
+                        ans.push_back(temp[i]);
+                
+                    }
+                
+                }
+                
+                 
+                
+                vector<int> traverseBoundary(TreeNode<int>* root){
+                
+                    vector<int>ans;
+                
+                    if(!root) return ans;
+                
+                    if(!isLeaf(root)){
+                
+                    ans.push_back(root->data);
+                
+                    }
+                
+                    leftB(root->left,ans);
+                
+                    leafN(root,ans);
+                
+                    rightB(root->right,ans);
+                
+                    return ans;
+                
+                }
+			}
+		}
+		right(n.right,arr,lvl+1,fin);
+		right(n.left,arr,lvl+1,fin);
+	}
+}

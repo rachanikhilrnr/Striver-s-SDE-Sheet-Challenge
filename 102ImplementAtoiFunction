@@ -1,0 +1,79 @@
+#include <bits/stdc++.h> 
+
+int atoi(string str) {
+
+    // Write your code here.
+
+    
+
+     
+
+     int i=0;
+
+     int ans=0;
+
+     bool isNegative=false;
+
+     while(i<str.length())
+
+     {
+
+        if(str[i]>='a'&&str[i]<='z')
+
+        {
+
+            i++;
+
+        }
+
+        else if(str[i]>='A'&&str[i]<='Z')
+
+        {
+
+            i++;
+
+        }
+
+        else if(str[i]=='-')
+
+        {
+
+            isNegative = true;
+
+            i++;
+
+        }
+
+        else if(str[i]>='0'&&str[i]<='9'){
+
+            int digit = str[i] - '0';
+
+            ans = (ans*10) + digit;
+
+            i++;
+
+        }
+
+ 
+
+     }
+
+     if(isNegative)
+
+     {
+
+         return -ans;
+
+     }
+
+     else
+
+     {
+
+         return ans;
+
+     }
+
+ 
+
+}

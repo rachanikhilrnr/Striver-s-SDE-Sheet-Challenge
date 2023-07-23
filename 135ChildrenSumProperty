@@ -1,0 +1,38 @@
+import java.util.* ;
+import java.io.*; 
+/*************************************************************
+
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode < Integer > {
+        int data;
+        BinaryTreeNode < Integer > left;
+        BinaryTreeNode < Integer > right;
+
+    public BinaryTreeNode(int data) {
+            this.data = data;
+        }
+    }
+
+*************************************************************/
+
+public class Solution {
+    public static void changeTree(BinaryTreeNode < Integer > root) {
+        inorder(root);
+    }
+    public static void inorder(BinaryTreeNode<Integer> n){
+        if(n==null){
+            return;
+        }
+        inorder(n.left);
+        int a=0;
+        if(n.left!=null){
+            a+=(n.left.data);
+        }
+        if(n.right!=null){
+            a+=(n.right.data);
+        }
+        n.data=a;
+        inorder(n.right);
+    }
+}

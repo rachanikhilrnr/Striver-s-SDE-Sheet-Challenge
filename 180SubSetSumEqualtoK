@@ -1,0 +1,21 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean subsetSumToK(int n, int k, int arr[]){
+        return recursion(arr,k,0);
+    }
+    public static boolean recursion(int[] arr,int target,int idx){
+        if(target==0){
+            return true;
+        }
+        if(idx==arr.length){
+            return false;
+        }
+        int tar=target-arr[idx];
+        if(recursion(arr,tar,idx+1) || recursion(arr,target,idx+1)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}

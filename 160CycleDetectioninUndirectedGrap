@@ -1,0 +1,47 @@
+import java.util.*;
+public class Solution {
+    
+    public static String cycleDetection(int[][] edges, int n, int m) {
+        if(n==0){
+            return "No";
+        }
+        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            if(adj.get(edges[i][0]-1).indexOf(edges[i][1]-1)==-1){
+                adj.get(edges[i][0]-1).add(edges[i][1]-1);
+            }
+            if(adj.get(edges[i][1]-1).indexOf(edges[i][0]-1)==-1){
+                adj.get(edges[i][1]-1).add(edges[i][0]-1);
+            }
+        }
+        boolean vis[]=new boolean[n];
+        ArrayList<Integer> arr=new ArrayList<>();
+        for(int i=0;i<vis.length;i++){
+            if(vis[i]==false){
+                vis[i]=true;
+                DFS(-1,i,adj,vis,arr);
+            }
+        }
+        if(arr.size()>0){
+            return "Yes";
+        }
+        return "No";
+    }
+    public static void DFS(int prev,int val,ArrayList<ArrayList<Integer>> adj,boolean vis[],ArrayList<Integer> arr){
+        for(Integer it:adj.get(val)){
+            if(vis[it]==false){
+                vis[it]=true;
+                DFS(val,it,adj,vis,arr);
+            }
+            else{
+                if(prev!=it){
+                    arr.add(1);
+                }
+            }
+        }
+    }
+    
+}

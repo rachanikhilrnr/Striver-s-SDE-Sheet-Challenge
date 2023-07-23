@@ -1,0 +1,63 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure:
+
+    class BinaryTreeNode {
+		int val;
+		BinaryTreeNode left;
+		BinaryTreeNode right;
+
+		BinaryTreeNode(int val) {
+			this.val = val;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+************************************************************/
+
+public class Solution {
+	public static ArrayList<Integer> getTopView(BinaryTreeNode root) {
+		ArrayList<Integer> ans=new ArrayList<>();
+        if(root==null){
+            return ans;
+        }
+        HashMap<BinaryTreeNode,Node> hs=new HashMap<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        Queue<BinaryTreeNode> q=new LinkedList<>();
+        q.add(root);
+        hs.put(root,new Node(root.val,0));
+        while(!q.isEmpty()){
+            BinaryTreeNode node=q.poll();
+            int lvl=hs.get(node).lvl;
+            if(!pq.contains(lvl)){
+                pq.add(lvl);
+            }
+            if(!map.containsKey(lvl)){
+				map.put(lvl,node.val);
+			}
+            if(node.left!=null){
+                q.add(node.left);
+                hs.put(node.left,new Node(node.left.val,lvl-1));
+            }
+            if(node.right!=null){
+                q.add(node.right);
+                hs.put(node.right,new Node(node.right.val,lvl+1));
+            }
+        }
+        while(!pq.isEmpty()){
+            ans.add(map.get(pq.poll()));
+        }
+        return ans;
+    }
+}
+class Node{
+    int data,lvl;
+    public Node(int data,int lvl){
+        this.data=data;
+        this.lvl=lvl;
+    }
+}

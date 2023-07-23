@@ -1,0 +1,46 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	
+	public static ArrayList < Integer > dijkstra(ArrayList< ArrayList < Integer > > vec, int vertices, int edges, int source){
+		ArrayList<ArrayList<ArrayList<Integer>>> adj=new ArrayList<>();
+		for(int i=0;i<vertices;i++){
+			adj.add(new ArrayList<>());
+		}
+		for(int i=0;i<vec.size();i++){
+			int l=vec.get(i).get(0);
+			int r=vec.get(i).get(1);
+			int d=vec.get(i).get(2);
+			adj.get(l).add(new ArrayList<>(Arrays.asList(r,d)));
+			adj.get(r).add(new ArrayList<>(Arrays.asList(l,d)));
+      	}
+		int[] ans=new int[vertices];
+		Arrays.fill(ans,Integer.MAX_VALUE);
+		ans[source]=0;
+		boolean[] vis=new boolean[vertices];
+		vis[source]=true;
+		DFS(0,source,adj,vis,ans);
+		ArrayList<Integer> finalans=new ArrayList<>();
+		for(int i=0;i<ans.length;i++){
+			finalans.add(ans[i]);
+		}
+		return finalans;
+	}
+	public static void DFS(int dis,int node,ArrayList<ArrayList<ArrayList<Integer>>> adj,boolean[] vis,int[] ans){
+		for(int j=0;j<adj.get(node).size();j++){
+			if(vis[adj.get(node).get(j).get(0)]==false){
+				vis[adj.get(node).get(j).get(0)]=true;
+				int newdis=adj.get(node).get(j).get(1)+dis;
+				ans[adj.get(node).get(j).get(0)]=newdis;
+				DFS(newdis,adj.get(node).get(j).get(0),adj,vis,ans);
+			}
+			else{
+				if((dis+adj.get(node).get(j).get(1))<ans[adj.get(node).get(j).get(0)]){
+					int newdis=dis+adj.get(node).get(j).get(1);
+					ans[adj.get(node).get(j).get(0)]=newdis;
+					DFS(newdis,adj.get(node).get(j).get(0),adj,vis,ans);
+				}
+			}
+		}
+	}
+}

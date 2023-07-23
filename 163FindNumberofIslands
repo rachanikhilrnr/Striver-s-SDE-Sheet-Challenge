@@ -1,0 +1,32 @@
+public class Solution 
+{
+    public static int getTotalIslands(int[][] mat) 
+	{
+        boolean[][] vis=new boolean[mat.length][mat[0].length];
+        int c=0;
+        for(int i=0;i<vis.length;i++){
+            for(int j=0;j<vis[0].length;j++){
+                if(vis[i][j]==false && mat[i][j]==1){
+                    vis[i][j]=true;
+                    DFS(mat,vis,i,j);
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
+    public static void DFS(int[][] mat,boolean[][] vis,int x,int y){
+        for(int i=-1;i<2;i++){
+            for(int j=-1;j<2;j++){
+                int q=x+(i);
+                int w=y+(j);
+                if( (q>-1 && q<mat.length) && (w>-1 && w<mat[0].length) ){
+                    if(vis[q][w]==false && mat[q][w]==1){
+                        vis[q][w]=true;
+                        DFS(mat,vis,q,w);
+                    }
+                }
+            }
+        }
+    }
+}

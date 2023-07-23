@@ -1,0 +1,31 @@
+import java.util.*;
+public class Solution {
+    public static boolean isValidParenthesis(String s) {
+        Stack<String> st=new Stack<>();
+        HashMap<String,String> open=new HashMap<>();
+        HashMap<String,String> close=new HashMap<>();
+        open.put("{","}");
+        open.put("(",")");
+        open.put("[","]");
+        close.put("}","{");
+        close.put(")","(");
+        close.put("]","[");
+        for(int i=0;i<s.length();i++){
+            String val=Character.toString(s.charAt(i));
+            if(open.containsKey(val)){
+                st.push(val);
+            }else{
+                if(st.isEmpty()){
+                    return false;
+                }else{
+                    if(st.peek().equals(close.get(val))){
+                        st.pop();
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}

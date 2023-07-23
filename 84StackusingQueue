@@ -1,0 +1,42 @@
+import java.util.* ;
+import java.io.*; 
+public class Stack {
+    ArrayList<Integer> arr;
+    public Stack() {
+        arr=new ArrayList<>();
+    }
+
+
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+
+    public int getSize() { 
+        return arr.size();
+    }
+
+    public boolean isEmpty() {
+        if(arr.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public void push(int element) {
+        arr.add(element);
+    }
+
+    public int pop() {
+        if(!arr.isEmpty()){
+            return arr.remove(arr.size()-1);
+        }
+        return -1;
+    }
+
+    public int top() {
+        if(!arr.isEmpty()){
+            return arr.get(arr.size()-1);
+        }
+        return -1;
+    }
+}

@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	
+	public static int[] nextGreater(int[] arr, int n) {	
+		Stack<Integer> st=new Stack<>();
+		int i=arr.length-1;
+		while(i>-1){
+			if(i==arr.length-1){
+				st.push(arr[i]);
+				arr[i]=-1;
+			}else{
+				while(!st.isEmpty()){
+					if(st.peek()>arr[i]){
+						int temp=st.peek();
+						st.push(arr[i]);
+						arr[i]=temp;
+						break;
+					}else{
+						st.pop();
+					}
+				}
+				if(st.isEmpty()){
+					st.push(arr[i]);
+					arr[i]=-1;
+				}
+			}
+			i--;
+		}
+		return arr;
+	}
+
+}

@@ -1,0 +1,35 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the BinaryTreeNode class structure:
+
+    class BinaryTreeNode<T> {
+        T data;
+        BinaryTreeNode<T> left;
+        BinaryTreeNode<T> right;
+        
+        public BinaryTreeNode(T data) {
+            this.data = data;
+        }
+    }
+
+*******************************************************/
+
+public class Solution {
+    public static boolean identicalTrees(BinaryTreeNode<Integer> root1, BinaryTreeNode<Integer> root2) {
+        return identical(root1,root2);
+    }
+    public static boolean identical(BinaryTreeNode<Integer> n1,BinaryTreeNode<Integer> n2){
+        if(n1!=null && n2!=null){
+            if(n1.data!=n2.data){
+                return false;
+            }else{
+                if(identical(n1.left,n2.left)==false || identical(n1.right,n2.right)==false){
+                    return false;
+                }
+            }
+        }else if((n1==null && n2!=null) || (n1!=null && n2==null)){return false;}
+        return true;
+    }
+}

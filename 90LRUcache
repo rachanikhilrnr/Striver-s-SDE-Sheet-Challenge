@@ -1,0 +1,64 @@
+import java.util.*;
+class Node{
+    int key,val;
+    Node left;
+    Node right;
+    public Node(int key,int val){
+        this.key=key;
+        this.val=val;
+    }
+}
+public class LRUCache
+{
+    Node first;
+    Node last;
+    int l;
+    HashMap<Integer,Node> hs;
+    LRUCache(int capacity)
+    {
+        first=new Node(0,0);
+        last=new Node(0,0);
+        first.right=last;
+        last.left=first;
+        l=capacity;
+        hs=new HashMap<>();
+    }
+
+    public int get(int key)
+    {
+        if(hs.containsKey(key)){
+            Node n=hs.get(key);
+            remove(hs.get(key));
+            insert(n);
+            return n.val;
+        }
+        return -1;
+    }
+
+    public void put(int key, int value)
+    {
+        if (hs.containsKey(key)) {
+            remove(hs.get(key));
+        }
+        if (hs.size() == l) {
+            remove(last.left);
+        }
+        insert(new Node(key, value));
+    }
+    public void remove(Node n){
+        Node Left=n.left;
+        Node Right=n.right;
+        Left.right=Right;
+        Right.left=Left;
+        hs.remove(n.key);
+    }
+    public void insert(Node n){
+        Node nxt=first.right;
+        first.right=n;
+        nxt.left=n;
+        n.left=first;
+        n.right=nxt;
+        hs.put(n.key,first.right);
+    }
+}
+ 

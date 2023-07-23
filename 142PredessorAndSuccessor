@@ -1,0 +1,54 @@
+import java.util.* ;
+import java.io.*; 
+/*************************************************************
+    Following is the Binary Tree node structure
+
+	class TreeNode<T> {
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+*************************************************************/
+
+
+public class Solution {
+	public static ArrayList<Integer> predecessorSuccessor(TreeNode<Integer> root, int key) {
+		HashMap<Integer,Node> hs=new HashMap<>();
+		Inorder(root,null,hs);
+		ArrayList<Integer> arr=new ArrayList<>(Arrays.asList(hs.get(key).pre,hs.get(key).suc));
+		return arr;
+	}
+	public static void Inorder(TreeNode<Integer> node,TreeNode<Integer> parent,HashMap<Integer,Node> hs){
+		if(node==null){
+			return;
+		}
+		Node n;
+		if(parent==null){
+			n=new Node(-1,-1);
+		}else{
+			n=new Node(parent.data,-1);
+		}
+		hs.put(node.data,n);
+		parent.suc=node.data;
+		Inorder(node.left,node);
+		Inorder(node.right,node);
+	}
+}
+class Node{
+	int pre=-1;
+	int suc=-1;
+	public Node(int pre,int suc){
+		this.pre=pre;
+		this.suc=suc;
+	}
+	public Node(int suc){
+		this.suc=suc;
+	}
+}

@@ -1,0 +1,10 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean findPattern(String p, String s) {
+        if(s.contains(p)){
+            return true;
+        }
+        return false;
+    }
+}

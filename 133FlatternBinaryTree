@@ -1,0 +1,45 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure.
+
+	class TreeNode<T> 
+	{
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) 
+	    {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+************************************************************/
+
+public class Solution 
+{
+    public static TreeNode<Integer> flattenBinaryTree(TreeNode<Integer> root)
+    {
+		Queue<Integer> q=new LinkedList<>();
+        preorder(root,q);
+		TreeNode<Integer> res=new TreeNode<>(0);
+		TreeNode<Integer> temp=res;
+		while(!q.isEmpty()){
+			temp.right=new TreeNode(q.poll());
+			temp=temp.right;
+		}
+		return res.right;
+    }
+	public static void preorder(TreeNode<Integer> n,Queue<Integer> q){
+		if(n==null){
+			return;
+		}
+		q.add(n.data);
+		preorder(n.left,q);
+		preorder(n.right,q);
+	}
+}

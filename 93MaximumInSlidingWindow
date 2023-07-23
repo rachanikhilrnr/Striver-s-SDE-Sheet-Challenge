@@ -1,0 +1,27 @@
+import java.util.* ;
+import java.io.*; 
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+
+	public static ArrayList<Integer> getMaximumOfSubarrays(ArrayList<Integer> nums, int k) 
+	{
+		Deque<Integer> d=new ArrayDeque<>();
+		ArrayList<Integer> ans=new ArrayList<>();
+		for(int i=0;i<nums.size();i++){
+			while(!d.isEmpty() && d.peekFirst()==i-k){
+				d.pollFirst();
+			}
+			while(!d.isEmpty() && nums.get(d.peekLast())<nums.get(i)){
+				d.pollLast();
+			}
+			d.offerLast(i);
+			if(i-k+1>-1){
+				ans.add(nums.get(d.peekFirst()));
+			}
+		}
+		return ans;
+	}
+}

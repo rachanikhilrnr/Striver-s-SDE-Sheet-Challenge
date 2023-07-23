@@ -1,0 +1,13 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int distinctSubstring(String word) {
+        HashSet<String> hs=new HashSet<>();
+        for(int i=0;i<word.length();i++){
+            for(int j=0;j<word.length();j++){
+                hs.add(word.substring(i,j));
+            }
+        }
+        return hs.size();
+    }
+}

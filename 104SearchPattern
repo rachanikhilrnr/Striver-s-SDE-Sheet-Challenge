@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Solution {
+    public static List< Integer > stringMatch(String text, String pattern){
+        List<Integer> arr=new ArrayList<>();
+        for(int i=0;i<text.length();i++){
+            if(pattern.charAt(0)==text.charAt(i)){
+                int a=i;
+                int b=i+pattern.length();
+                if(b<=text.length()){
+                    if(pattern.equals(text.substring(i,b))){
+                        arr.add(a+1);
+                    }
+                }
+            }
+        }
+        return arr;
+    }
+}
